@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kryptos</title>
+    
+    <!-- Bootstrap 5.3.0 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+          
+    
+    <!-- Font Awesome 6.5.1 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="home"><b>Kry<span style="color: rgb(8, 109, 73);">ptos***</span></b></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav nav-tabs me-auto mb-2 mb-lg-0">
+                <!-- Home Link -->
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#v-pills-home" data-bs-toggle="tab">Home</a>
+                </li>
+                <!-- Records Link -->
+                <li class="nav-item">
+                  <a class="nav-link" href="passwordvault">Records</a>
+                </li>
+                <!-- Dropdown Menu -->
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
+                     data-bs-toggle="dropdown" aria-expanded="false">
+                    Settings
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#changeEmailModal">Change Email</a></li>
+                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#changeUsernameModal">Change Username</a></li>
+                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#changeMasterPasswordModal">Change Master Password</a></li>
+                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#updateSecurityModal">Update Security Question</a></li>
+                  </ul>
+                </li>
+                          <!-- Logout Link -->
+              <li class="nav-item">
+                  <a class="nav-link btn-danger" id="logoutButton" href="/logout">Logout</a>
+                </li>
+              </nav>
+              {% if user_new_email %}
+              <div class="alert alert-info text-center">
+                  A verification email has been sent to {{ user_new_email }}. Please verify your new email address.
+              </div>
+              {% endif %}
+    <style>
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-left: -150px;
+            flex-wrap: wrap; /* Ensures responsiveness */
+        }
+        .card {
+            margin: 10px;
+            font-size: 24px;
+            width: 100%;
+            max-width: 18rem;
+        }
+        .custom-nav-column {
+            background-color: rgb(8, 109, 73);
+            color: white;
+        }
+
+        .custom-tab-content {
+            background-color: rgb(8, 109, 73);
+        }
+
+        .nav-tabs .nav-link.active {
+            background-color: rgb(8, 109, 73);
+            color: white;
+        }
+
+        .nav-tabs .nav-link:hover {
+            background-color: rgb(8, 109, 73);
+            color: white;
+        }
+
+        .nav-tabs .nav-link {
+            color: black;
+        }
+
+        #logoutButton:hover {
+            background-color: #A32424 !important;
+            color: white;
+        }
+        .btn-primary{
+            background-color: rgb(8, 109, 73);
+            transition:0.9s;
+        }
+
+        .btn-primary:hover{
+            background-color: rgb(6, 77, 52);
+
+        }
+
+        .fixed-button {
+            position: fixed;
+            bottom: 20px; /* Distance from the bottom of the viewport */
+            right: 36px;  /* Distance from the right of the viewport */
+            z-index: 100; /* To ensure it stays above other elements */
+        }
+
+        .fixed-button-top {
+            position: fixed;
+            bottom: 60px; /* This keeps it above the generate password button */
+            right: 36px;
+            z-index: 100; /* Ensure it stays above other elements */
+            margin-bottom: 15px; /* Optional: additional space below the button */
+        }
+        .btn-success {
+            background-color: #2d53da;
+
+        }
+        .btn-success:hover {
+            background-color: #1b3284;
+
+            
+        }
+
+    </style>
+</head>
+<body>
+ <h1>asdfasdf</h1>
+</body>
+</html>

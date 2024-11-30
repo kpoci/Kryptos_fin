@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+         <!-- Bootstrap 5.3.0 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    
+
+<!-- Font Awesome 6.5.1 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+<link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+                       <!-- Horizontal Navbar (Bootstrap 5) -->
+                       <nav class="navbar navbar-expand-lg navbar-light bg-light" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);padding-left: 30px;">
+                        <div class="container-fluid">
+                          <a class="navbar-brand" href="home"><b>Kry<span style="color: rgb(8, 109, 73);">ptos***</span></b></a>
+                          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                          </button>
+                          <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding-left:40px">
+                            <ul class="navbar-nav nav-pills me-auto mb-2 mb-lg-0">
+                              <!-- Home Link -->
+                              <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="home" >Home</a>
+                              </li>
+                              <!-- Records Link -->
+                              <li class="nav-item">
+                                <a class="nav-link " href="passwordvault">Records</a>
+                              </li>
+                              <!-- Dropdown Menu -->
+                              <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-home" role="button" 
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                  Settings
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#changeEmailModal">Change Email</a></li>
+                                  <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#changeUsernameModal">Change Username</a></li>
+                                  <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#changeMasterPasswordModal">Change Master Password</a></li>
+                                  <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#updateSecurityModal">Update Security Question</a></li>
+                                </ul>
+                                </li>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                  </ul>
+                                
+                                <!-- Learn More -->
+                              <li class="nav-item">
+                                <a class="nav-link active" href="learn_more_route">Learn More</a>
+                              </li>
+                            </li>
+                        </ul>
+            
+                                
+                              <a class="btn btn-dark" id="logoutButton" href="/logout">Logout</a>
+                            </div>
+                          </div>
+                               
+                            </nav>
+                              
+                              <style>
+                                *{
+                                    font-family: 'Inria Sans', sans-serif;
+                                }
+                                #toggleConfirmPasswordVisibility{
+                                    float: right;
+                                    top:11px;
+                                    margin-left: -15px;
+                                    right: 15px;
+                                    position:relative;
+                                }
+                                #toggleNewPasswordVisibility{
+                                    float: right;
+                                    top:11px;
+                                    margin-left: -15px;
+                                    right: 15px;
+                                    position:relative;
+                                }
+                                #toggleCurrentPasswordVisibility{
+                                    float: right;
+                                    top:11px;
+                                    margin-left: -15px;
+                                    right: 15px;
+                                    position:relative;
+                                }
+                                #toggleMasterPasswordVisibility{
+                                    float: right;
+                                    top:-27px;
+                                    margin-left: -15px;
+                                    right: 10px;
+                                    position:relative;
+                                }
+                                #currentMasterPassword  {
+                                    border-radius:7px;
+                                }
+                                #confirmMasterPassword  {
+                                    border-radius:7px;
+                                }
+                                #newMasterPassword  {
+                                    border-radius:7px;
+                                }
+                              .bd-placeholder-img {
+                                font-size: 1.125rem;
+                                text-anchor: middle;
+                                -webkit-user-select: none;
+                                -moz-user-select: none;
+                                user-select: none;
+                              }
+                        
+                              @media (min-width: 768px) {
+                                .bd-placeholder-img-lg {
+                                  font-size: 3.5rem;
+                                }
+                              }
+                              .text-body-secondary {
+                                color: #ffffff !important; /* Replace with your desired color */
+                              }
+                              .b-example-divider {
+                                width: 100%;
+                                height: 3rem;
+                                background-color: rgba(0, 0, 0, .1);
+                                border: solid rgba(0, 0, 0, .15);
+                                border-width: 1px 0;
+                                box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+                              }
+                        
+                              .b-example-vr {
+                                flex-shrink: 0;
+                                width: 1.5rem;
+                                height: 100vh;
+                              }
+                        
+                              .bi {
+                                vertical-align: -.125em;
+                                fill: currentColor;
+                              }
+                        
+                              .nav-scroller {
+                                position: relative;
+                                z-index: 2;
+                                height: 2.75rem;
+                                overflow-y: hidden;
+                              }
+                        
+                              .nav-scroller .nav {
+                                display: flex;
+                                flex-wrap: nowrap;
+                                padding-bottom: 1rem;
+                                margin-top: -1px;
+                                overflow-x: auto;
+                                text-align: center;
+                                white-space: nowrap;
+                                -webkit-overflow-scrolling: touch;
+                              }
+                        
+                              .btn-bd-primary {
+                                --bd-violet-bg: #712cf9;
+                                --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+                        
+                                --bs-btn-font-weight: 600;
+                                --bs-btn-color: var(--bs-white);
+                                --bs-btn-bg: var(--bd-violet-bg);
+                                --bs-btn-border-color: var(--bd-violet-bg);
+                                --bs-btn-hover-color: var(--bs-white);
+                                --bs-btn-hover-bg: #6528e0;
+                                --bs-btn-hover-border-color: #6528e0;
+                                --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+                                --bs-btn-active-color: var(--bs-btn-hover-color);
+                                --bs-btn-active-bg: #5a23c8;
+                                --bs-btn-active-border-color: #5a23c8;
+                              }
+                        
+                              .btn-dark{
+                                background-color:transparent;
+                                border:none;
+                                color: black;
+                                transition:0.3s;
+                                margin-right: 30px;
+                              }
+                        
+                              .btn-dark:hover{
+                                background-color:#A32424;
+                                
+                              }
+                        
+                              .btn-outline-secondary{
+                                background-color:rgb(8, 109, 73);
+                                color: white;
+                                border-color: rgb(8, 109, 73);
+                                transition:0.5s;
+                                width: 150px;
+                                height: 35px;
+                                font-size:medium;
+                        
+                              }
+                              .btn-outline-secondary:hover{
+                                background-color:rgb(5, 66, 45);
+                        
+                        
+                              }
+                        
+                              .btn-light{
+                                border-radius: 20px;
+                                width: 200px;
+                                height: 50px;
+                                color: rgb(8, 109, 73);
+                                transition:0.9s;
+                                text-align: center; /* Center horizontally */
+                                line-height: 35px; /* Match the button's height for vertical centering */
+                                font-size: 20px;
+                        
+                              }
+
+                              .btn-light:hover{
+
+                                color: rgb(8, 109, 73);
+
+                              }
+                              .dropdown-menu {
+                                display: none;
+                            }
+                            .dropdown-menu.show {
+                                display: block;
+                            }
+                            .custom-nav-column {
+                                background-color: rgb(8, 109, 73);
+                                color: white;
+                            }
+                            .custom-tab-content {
+                                background-color: rgb(8, 109, 73);
+                            }
+                            .nav-pills .nav-link.active {
+                                background-color: rgb(8, 109, 73);
+                                color: white;
+                            }
+                            
+                            .nav-pills .nav-link:hover {
+                                background-color: rgb(8, 109, 73);
+                                color: white;
+                            }
+                            
+                            .nav-pills .nav-link {
+                                color: black;
+                            }
+                            .nav-tabs .nav-link.active {
+                                background-color: rgb(8, 109, 73);
+                                color: white;
+                            }
+                            
+                            .btn-success {
+                                background-color: #2d53da;
+                    
+                            }
+                            .btn-success:hover {
+                                background-color: #1b3284;
+                    
+                                
+                            }
+                    
+                            .new-container {
+                                margin-top: 20px;
+                                padding: 20px;
+                                background-color: #f8f9fa;
+                                border: 1px solid #dee2e6;
+                                border-radius: 5px;
+                            }
+                            .custom-btn {
+                                width: 70px;
+                                height: 70px;
+                                margin-top: 30px;
+                                border-radius: 10px;
+                                background-color: #ffff;
+                                color: rgb(8, 109, 73);
+                                margin-left: -20px;
+                            }
+                            .modal-dialog1 {
+                                max-width: 35%; /* Adjust this value as needed */
+                                margin: 1.75rem auto; /* Adjusting the margin to center the modal */
+                                padding-right: 10px;
+                            }
+                            
+                            #logoutButton:hover {
+                                background-color: #A32424 !important;
+                                color: white;
+                            }
+                            input{
+                                color:inherit;
+                                width:100%;
+                                background-color:transparent;
+                                border:none;
+                                border-bottom:.2px solid hwb(0 100% 0%);
+                                padding-left:1.2rem;
+                                font-size:15px;
+                            }
+                            .btn-primary{
+                                background-color: rgb(8, 109, 73);
+                                transition:0.9s;
+                            }
+                    
+                            .btn-primary:hover{
+                                background-color: rgb(6, 77, 52);
+                    
+                            }
+                    
+                            .fixed-button {
+                                position: fixed;
+                                bottom: 20px; /* Distance from the bottom of the viewport */
+                                right: 20px;  /* Distance from the right of the viewport */
+                                z-index: 100; /* To ensure it stays above other elements */
+                            }
+                    
+                            .fixed-button-top {
+                                position: fixed;
+                                bottom: 60px; /* This keeps it above the generate password button */
+                                right: 20px;
+                                z-index: 100; /* Ensure it stays above other elements */
+                                margin-bottom: 15px; /* Optional: additional space below the button */
+                            }
+                            #input-password-group{
+                                border-bottom:none;
+                            }
+                            form{
+                                margin:0 2rem;
+                            }
+                            .form-title{
+                                font-size:1.5rem;
+                                font-weight:bold;
+                                text-align:center;
+                                padding:1.3rem;
+                                margin-bottom:0.4rem;
+                            }
+                            input{
+                                color:inherit;
+                                width:100%;
+                                background-color:transparent;
+                                border:none;
+                                border-bottom:.2px solid #757575;
+                                padding-left:1.2rem;
+                                font-size:15px;
+                            }
+                            .input-group{
+                                padding:1px 0;
+                                position:relative;
+                            
+                            }
+                            .input-group i{
+                                position:absolute;
+                                color:black;
+                            }
+                            input:focus{
+                                background-color: transparent;
+                                outline:transparent;
+                                border-bottom:1px solid rgb(8, 109, 73);
+                            }
+                            input::placeholder{
+                                color:transparent;
+                            }
+                            
+                            input:focus~label,input:not(:placeholder-shown)~label{
+                                top:-3em;
+                                color:rgb(8, 109, 73);
+                                font-size:15px;
+                            }
+                            .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+                                background-color: rgb(8, 109, 73); /* Desired background color */
+                                color: white;               /* Desired text color */
+                                transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+                            }
+                            
+                            /* Optional: Change the background color on hover when active */
+                            .nav-item.dropdown.show > .nav-link.dropdown-toggle:hover{
+                                background-color: rgb(8, 109, 73); /* Slightly darker shade for hover effect */
+                                color: white;
+                            }
+                            
+                            .nav-item.dropdown-item.active > .nav-link.dropdown-toggle:hover{
+                                background-color: rgb(8, 109, 73); /* Slightly darker shade for hover effect */
+                                color: white;
+                            }
+                            
+                            .dropdown-item:hover{
+                                background-color: rgb(8, 109, 73); /* Slightly darker shade for hover effect */
+                                color: white;
+                            }
+
+                            .faq-2 {
+                                margin-top: -100px;  /* Adjust this value to move it upwards or downwards */
+                                padding-bottom: 50px;
+                            }
+
+                            .learn-more {
+                                margin-bottom: -80px;  /* Adjust this value to move it upwards or downwards *
+                            }
+                            </style>
+    </head>
+    <body>
+        <!-- Success Toast -->
+        <div id="successToast" 
+        class="toast position-fixed top-0 end-0 p-3 text-bg-success" 
+        style="z-index: 1050;" 
+        role="alert" 
+        aria-live="polite" 
+        aria-atomic="true" 
+        data-bs-delay="3000">
+        <div class="d-flex">
+            <div class="toast-body">
+                Success message placeholder.
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+
+    <!-- Error Toast -->
+        <div id="errorToast" 
+        class="toast position-fixed top-0 end-0 p-3 text-bg-danger" 
+        style="z-index: 1050;" 
+        role="alert" 
+        aria-live="assertive" 
+        aria-atomic="true" 
+        data-bs-delay="3000">
+        <div class="d-flex">
+            <div class="toast-body">
+                Error message placeholder.
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div> <!-- Change Email Modal -->
+    <div class="modal fade" id="changeEmailModal" tabindex="-1" role="dialog" aria-labelledby="changeEmailModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changeEmailModalLabel">Change Email</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="changeEmailForm">
+                        <div class="mb-3">
+                            <label for="newEmail">New Email:</label>
+                            <input type="email" class="form-control" id="newEmail" required>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Update Email</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Change Username Modal -->
+<div class="modal fade" id="changeUsernameModal" tabindex="-1" role="dialog" aria-labelledby="changeUsernameModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="changeUsernameModalLabel">Change Username</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </button>
+        </div>
+        <div class="modal-body">
+        <form id="changeUsernameForm">
+            <div class="mb-3">
+            <label for="newUsername">New Username:</label>
+            <input type="text" class="form-control" id="newUsername" required>
+            </div>
+            <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Update Username</button>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+</div>
+
+<!-- Change Master Password Modal -->
+<div class="modal fade" id="changeMasterPasswordModal" tabindex="-1" role="dialog" aria-labelledby="changeMasterPasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="changeMasterPasswordForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changeMasterPasswordModalLabel">Change Master Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+    
+                <div class="modal-body">
+                    <!-- Current Master Password Field -->
+                    <div class="form-group">
+                        <div class="mb-3">
+                            <label for="currentMasterPassword">Current Master Password:</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="currentMasterPassword" required>
+
+                                    <i class="far fa-eye" id="toggleCurrentPasswordVisibility" style="cursor: pointer;"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- New Master Password Field -->
+                    <div class="form-group">
+                        <div class="mb-3">
+                            <label for="newMasterPassword">New Master Password:</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="newMasterPassword" required>
+                                    <i class="far fa-eye" id="toggleNewPasswordVisibility" style="cursor: pointer;"></i>
+                            </div>
+                            <div id="passwordHelpBlock" class="form-text">
+                                Password must be 8+ characters, include upper and lowercase letters, a number, and a special character (spaces are allowed).
+                            </div>
+                            <!-- Password Strength Meter -->
+                            <div class="progress mt-2">
+                                <div id="passwordStrengthBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small id="passwordStrengthText" class="form-text"></small>
+                        </div>
+                    </div>
+                    <!-- Confirm New Master Password Field -->
+                    <div class="form-group">
+                        <div class="mb-3">
+                            <label for="confirmMasterPassword">Confirm New Master Password:</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="confirmMasterPassword" required>
+                                    <i class="far fa-eye" id="toggleConfirmPasswordVisibility" style="cursor: pointer;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Update Master Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</div>
+</div>
+    <!-- Update Security Question Modal -->
+<div class="modal fade" id="updateSecurityModal" tabindex="-1" role="dialog" aria-labelledby="updateSecurityModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form id="updateSecurityForm">
+        <div class="modal-header">
+            <h5 class="modal-title" id="updateSecurityModalLabel">Update Security Question and Answer</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <!-- Current Master Password Field -->
+            <div class="mb-3">
+            <label for="currentMasterPasswordForSecurity">Current Master Password:</label>
+            <div class="mb-3">
+                <input type="password" class="form-control" id="currentMasterPasswordForSecurity" required>
+                <span>
+                <i class="far fa-eye" id="toggleMasterPasswordVisibility" style="cursor: pointer;"></i>
+                </span>
+            </div>
+            </div>
+            <!-- Security Question Dropdown -->
+            <div class="mb-3">
+            <label for="newSecurityQuestion">New Security Question:</label>
+            <select class="form-control" id="newSecurityQuestion" required>
+                <option value="" disabled selected>Select a Security Question</option>
+                <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                <option value="What was the name of your first pet?">What was the name of your first pet?</option>
+                <option value="What is the name of the first school you attended?">What is the name of the first school you attended?</option>
+                <option value="What is the name of the town where you were born?">What is the name of the town where you were born?</option>
+                <option value="What is the name of your favorite book or movie?">What is the name of your favorite book or movie?</option>
+                <option value="What is the first concert you attended?">What is the first concert you attended?</option>
+                <option value="What is your dream job?">What is your dream job?</option>
+                <option value="What is the name of the hospital where you were born?">What is the name of the hospital where you were born?</option>
+                <option value="What was your childhood nickname?">What was your childhood nickname?</option>
+                <option value="What was the name of your first crush?">What was the name of your first crush?</option>
+                <!-- Add more questions as needed -->
+            </select>
+            </div>
+            <!-- Security Answer Field -->
+            <div class="mb-3">
+            <label for="newSecurityAnswer">New Security Answer:</label>
+            <input type="text" class="form-control" id="newSecurityAnswer" required>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Update Security Question</button>
+        </div>
+        </form>
+    </div>
+    </div>
+</div>
+
+
+
+
+    {% if user_new_email %}
+    <div class="alert alert-info text-center">
+        A verification email has been sent to {{ user_new_email }}. Please verify your new email address.
+    </div>
+    {% endif %}
+        <div class="text-center learn-more">
+        <img src="/static/learn_more.png" alt="Description of Image" width="1380" height="auto">
+        </div>
+        <div class="text-center">
+            <img src="/static/faq_1.png" alt="Description of Image" width="1380" height="auto">
+            </div>
+            <div class="text-center faq-2">
+                <img src="/static/faq_2.png" alt="Description of Image" width="1380" height="auto">
+                </div>
+        <script src="" async defer></script>
+        <script>
+            // Toast utility function
+            function showToast(toastId, message) {
+                const toastElement = document.getElementById(toastId);
+                const toastBody = toastElement.querySelector('.toast-body');
+                toastBody.textContent = message;
+        
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastElement);
+                toastBootstrap.show();
+            }
+             // Change Username Form Submission
+             document.getElementById('changeUsernameForm').addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                const newUsername = document.getElementById('newUsername').value;
+
+                fetch('/change_username', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        username: newUsername,
+                    }),
+                })
+                    .then(response => {
+                        // Save the response for checking .ok
+                        if (!response.ok) {
+                            // Parse and handle error response
+                            return response.json().then(data => {
+                                showToast('errorToast', data.message || 'Failed to update username.');
+                                throw new Error(data.message || 'Failed to update username.');
+                                
+                            });
+                        }
+                        return response.json(); // Parse successful response
+                    })
+                    .then(data => {
+                        // Show success toast
+                        showToast('successToast', data.message || 'Username updated successfully.');
+                        setTimeout(() => {
+                            location.reload(); // Reload the page after 2 seconds
+                        }, 2000);
+                        // Close modal and reset form
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('changeUsernameModal'));
+                        modal.hide();
+                        document.getElementById('changeUsernameForm').reset();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // The error toast is already displayed in the error handling above
+                    });
+            });
+            // Function to validate password against the requirements
+            function isPasswordValid(password) {
+                    // Check length
+                    if (password.length < 8) return false;
+                    // Check for lowercase letter
+                    if (!password.match(/[a-z]/)) return false;
+                    // Check for uppercase letter
+                    if (!password.match(/[A-Z]/)) return false;
+                    // Check for digit
+                    if (!password.match(/\d/)) return false;
+                    // Check for special character (excluding spaces)
+                    if (!password.match(/[^a-zA-Z0-9\s]/)) return false;
+                    // If all checks pass, return true
+                    return true;
+                }
+
+            // Change Master Password
+            document.getElementById('changeMasterPasswordForm').addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                const currentPassword = document.getElementById('currentMasterPassword').value;
+                const newPassword = document.getElementById('newMasterPassword').value;
+                const confirmPassword = document.getElementById('confirmMasterPassword').value;
+
+                // Validate the new password against the requirements
+                if (!isPasswordValid(newPassword)) {
+                    // Show error toast for invalid password
+                    showToast('errorToast', 'Password does not meet the requirements!');
+                    return;
+                }
+
+                if (newPassword !== confirmPassword) {
+                    // Show error toast for mismatched passwords
+                    showToast('errorToast', 'New passwords do not match!');
+                    return;
+                }
+
+                fetch('/change_master_password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        current_master_password: currentPassword,
+                        new_master_password: newPassword,
+                        confirm_master_password: confirmPassword,
+                    }),
+                })
+                    .then(response => {
+                        // Save response to check .ok
+                        if (!response.ok) {
+                            return response.json().then(data => {
+                                // Show error toast for server-side failure
+                                showToast('errorToast', data.message || 'Failed to update password.');
+                                throw new Error(data.message || 'Failed to update password.');
+                            });
+                        }
+                        return response.json(); // Parse JSON if response is okay
+                    })
+                    .then(data => {
+                        // Show success toast
+                        showToast('successToast', data.message || 'Password updated successfully.');
+                        // Close modal and reset form
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('changeMasterPasswordModal'));
+                        modal.hide();
+                        document.getElementById('changeMasterPasswordForm').reset();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showToast('errorToast', error.message || 'An unexpected error occurred.');
+                    });
+            });
+
+            // Password Strength Meter for Change Master Password Modal
+            document.getElementById('newMasterPassword').addEventListener('input', function () {
+                const password = this.value;
+                const strengthBar = document.getElementById('passwordStrengthBar');
+                const strengthText = document.getElementById('passwordStrengthText');
+
+                const strength = calculatePasswordStrength(password);
+
+                strengthBar.style.width = strength.percent + '%';
+                strengthBar.className = 'progress-bar ' + strength.class;
+                strengthText.textContent = strength.message;
+            });
+
+            // Function to calculate password strength
+            function calculatePasswordStrength(password) {
+                let strengthScore = 0;
+                let strength = {
+                    percent: 0,
+                    class: '',
+                    message: ''
+                };
+
+                if (password.length >= 8) strengthScore += 1;
+                if (password.match(/[a-z]/)) strengthScore += 1;
+                if (password.match(/[A-Z]/)) strengthScore += 1;
+                if (password.match(/\d/)) strengthScore += 1;
+                if (password.match(/[^a-zA-Z0-9\s]/)) strengthScore += 1; // Special character (excluding spaces)
+                if (password.match(/\s/)) strengthScore += 1; // Spaces are allowed and count towards strength
+
+                switch (strengthScore) {
+                    case 0:
+                    case 1:
+                        strength.percent = 16;
+                        strength.class = 'bg-danger';
+                        strength.message = 'Very Weak';
+                        break;
+                    case 2:
+                        strength.percent = 33;
+                        strength.class = 'bg-danger';
+                        strength.message = 'Weak';
+                        break;
+                    case 3:
+                        strength.percent = 50;
+                        strength.class = 'bg-warning';
+                        strength.message = 'Fair';
+                        break;
+                    case 4:
+                        strength.percent = 66;
+                        strength.class = 'bg-info';
+                        strength.message = 'Good';
+                        break;
+                    case 5:
+                        strength.percent = 83;
+                        strength.class = 'bg-primary';
+                        strength.message = 'Strong';
+                        break;
+                    case 6:
+                        strength.percent = 100;
+                        strength.class = 'bg-success';
+                        strength.message = 'Very Strong';
+                        break;
+                }
+
+                return strength;
+        }
+            // Toggle visibility of passwords in Change Master Password Modal
+            function toggleMasterPasswordVisibility(passwordFieldId, toggleIconId) {
+                            const passwordField = document.getElementById(passwordFieldId);
+                            const toggleIcon = document.getElementById(toggleIconId);
+                            if (!passwordField || !toggleIcon) return;
+
+                            if (passwordField.type === 'password') {
+                                passwordField.type = 'text';
+                                toggleIcon.classList.remove('fa-eye');
+                                toggleIcon.classList.add('fa-eye-slash');
+                            } else {
+                                passwordField.type = 'password';
+                                toggleIcon.classList.remove('fa-eye-slash');
+                                toggleIcon.classList.add('fa-eye');
+                            }
+                        }
+
+                        // Event Listeners for Change Master Password Modal Toggle Icons
+                        document.getElementById('toggleCurrentPasswordVisibility').addEventListener('click', function () {
+                            toggleMasterPasswordVisibility('currentMasterPassword', 'toggleCurrentPasswordVisibility');
+                        });
+
+                        document.getElementById('toggleNewPasswordVisibility').addEventListener('click', function () {
+                            toggleMasterPasswordVisibility('newMasterPassword', 'toggleNewPasswordVisibility');
+                        });
+
+                        document.getElementById('toggleConfirmPasswordVisibility').addEventListener('click', function () {
+                            toggleMasterPasswordVisibility('confirmMasterPassword', 'toggleConfirmPasswordVisibility');
+                        });
+
+            
+
+            // Update Security Question Form Submission
+            document.getElementById('updateSecurityForm').addEventListener('submit', function (event) {
+                    event.preventDefault(); // Prevent default form submission
+
+                    const currentMasterPassword = document.getElementById('currentMasterPasswordForSecurity').value;
+                    const newSecurityQuestion = document.getElementById('newSecurityQuestion').value;
+                    const newSecurityAnswer = document.getElementById('newSecurityAnswer').value;
+
+                    fetch('/update_security_question', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        current_master_password: currentMasterPassword,
+                        new_security_question: newSecurityQuestion,
+                        new_security_answer: newSecurityAnswer,
+                    }),
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                        return response.json().then(data => {
+                            showToast('errorToast', data.message || 'Failed to update security question.');
+                            throw new Error(data.message || 'Failed to update security question.');
+                        });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Show success toast
+                        showToast('successToast', data.message || 'Security question updated successfully.');
+
+                        // Close modal and reset form
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('updateSecurityModal'));
+                        modal.hide();
+                        document.getElementById('updateSecurityForm').reset();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showToast('errorToast', error.message || 'An unexpected error occurred.');
+                    });
+                });
+
+            // Toggle visibility of current master password in update security question modal
+            document.getElementById('toggleMasterPasswordVisibility').addEventListener('click', function () {
+                const passwordField = document.getElementById('currentMasterPasswordForSecurity');
+                const icon = this;
+                if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+                } else {
+                passwordField.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+                }
+            });
+
+            document.addEventListener('DOMContentLoaded', function () {
+        // Create a MutationObserver to watch for changes in the DOM
+        const observer = new MutationObserver(function (mutationsList, observer) {
+            const togglePasswordButton = document.getElementById('toggleMasterPasswordshow');
+            if (togglePasswordButton) {
+                togglePasswordButton.addEventListener('click', function () {
+                    const passwordField = document.getElementById('currentMasterPasswordForSecurity');
+                    const icon = this;
+                    if (passwordField.type === 'password') {
+                        passwordField.type = 'text';
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    } else {
+                        passwordField.type = 'password';
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                });
+                // Once the event listener is added, disconnect the observer
+                observer.disconnect();
+            }
+        })
+        });
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Security Question{% endblock %}
+{% block content %}
+<div class="container">
+    <h3>Answer Security Question</h3>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form method="post">
+        <div class="mb-3">
+            <label for="security_answer" class="form-label"><strong>{{ security_question }}</strong></label>
+            <input type="text" class="form-control" name="security_answer" id="security_answer" placeholder="Your Answer" required>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit Answer">
+    </form>
+</div>
+{% endblock %}

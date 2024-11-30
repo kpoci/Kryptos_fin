@@ -1,0 +1,420 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Inria Sans', sans-serif;
+}
+body{
+    background-color: #f9fbfd;
+}
+.container{
+    background:#ffffff;
+    width:450px;
+    padding:1.5rem;
+    margin:50px auto;
+    border-radius:10px;
+    height: 500px;
+    margin-top: 100px;
+    box-shadow: 0 2px 4px rgb(171 169 169 / 90%);
+
+}
+
+.container1{
+    background:#fff;
+    width:600px;
+    padding:1.5rem;
+    margin:50px auto;
+    border-radius:10px;
+}
+form{
+    margin:0 2rem;
+}
+.form-title{
+    font-size:1.5rem;
+    font-weight:bold;
+    text-align:center;
+    padding:1.3rem;
+    margin-bottom:0.4rem;
+}
+input{
+    color:inherit;
+    width:100%;
+    background-color:transparent;
+    border:none;
+    border-bottom:.2px solid #757575;
+    padding-left:1.2rem;
+    font-size:15px;
+}
+.input-group{
+    padding:1px 0;
+    position:relative;
+
+}
+.input-group i{
+    position:absolute;
+    color:black;
+}
+input:focus{
+    background-color: transparent;
+    outline:transparent;
+    border-bottom:1px solid rgb(8, 109, 73);
+}
+input::placeholder{
+    color:transparent;
+}
+
+input:focus~label,input:not(:placeholder-shown)~label{
+    top:-3em;
+    color:rgb(8, 109, 73);
+    font-size:15px;
+}
+.recover{
+    text-align:right;
+    font-size:1rem;
+    margin-bottom:1rem;
+
+}
+.recover a{
+    text-decoration:none;
+    color:rgb(125,125,235);
+}
+.recover a:hover{
+    color:blue;
+    text-decoration:underline;
+}
+.btn1{
+    font-size:1.1rem;
+    padding:8px 0;
+    border-radius:50px;
+    outline:none;
+    border:none;
+    width:100%;
+    background:rgb(8, 109, 73);
+    color:white;
+    cursor:pointer;
+    transition:0.9s;
+}
+
+.btn2{
+    margin-right: 10px;
+    font-size:1.1rem;
+    padding:8px 5px;
+    border-radius:10px;
+    outline:none;
+    border:none;
+    width:100%;
+    background:rgb(8, 109, 73);
+    color:white;
+    cursor:pointer;
+    transition:0.9s;
+}
+
+.custom-delete-btn {
+    background-color: rgb(117, 7, 7); /* Custom background color */
+    color: #fff; /* Text color */
+    border: none; /* Remove border */
+}
+
+.custom-delete-btn:hover {
+    background-color: rgb(150, 10, 10); /* Darker shade on hover for better contrast */
+    color: #fff; /* Ensure text remains white on hover */
+}
+
+/* Important: Override the Bootstrap hover effect */
+.custom-delete-btn:hover {
+    background: rgb(73, 5, 5) !important; /* Override Bootstrap's hover effect */
+    color: white !important; /* Keep text color white */
+}
+
+.btn2:hover {
+    background:#0f4b0f;
+    color:#ffffff ;
+}
+
+.vertical-center {
+    min-height: 50vh; /* Fallback for browsers do not support vh unit */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.or{
+    font-size:1.1rem;
+    margin-top:0.5rem;
+    text-align:center;
+}
+.icons{
+    text-align:center;
+}
+.icons i{
+    color:rgb(125,125,235);
+    padding:0.8rem 1.5rem;
+    border-radius:10px;
+    font-size:1.5rem;
+    cursor:pointer;
+    border:2px solid #dfe9f5;
+    margin:0 15px;
+    transition:1s;
+}
+.icons i:hover{
+    background:#07001f;
+    font-size:1.6rem;
+    border:2px solid rgb(125,125,235);
+}
+.links{
+    display:flex;
+    justify-content:space-around;
+    padding:0 4rem;
+    margin-top:0.9rem;
+    font-weight:bold;
+}
+button{
+    color:rgb(125,125,235);
+    border:none;
+    background-color:transparent;
+    font-size:1rem;
+    font-weight:bold;
+}
+button:hover{
+    text-decoration:underline;
+    color:blue;
+}
+
+.navbar_shadow{
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+}
+/* Add this CSS for your password view table */
+.table-container {
+    width: 100%; /* Ensures it fits within the card */
+    max-width: 100%; /* Prevents it from growing beyond its parent */
+    overflow-x: auto; /* Allows horizontal scrolling if content is too wide */
+    margin: 0 auto; /* Centers the table within the card */
+}
+
+.table-container table {
+    width: 100%; /* Table takes full container width */
+    border-collapse: collapse; /* Optional: makes table look more compact */
+}
+
+.table-container table td, .table-container table th {
+    max-width: 200px; /* Adjust this as needed */
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adds '...' for overflow */
+}
+/* CSS for navbar link hover effect */
+.nav-link:hover {
+    background-color: rgb(8, 109, 73); /* Change this to your preferred color */
+    color: white; /* Text color on hover */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+/* CSS to change navbar brand color */
+.navbar-brand:hover {
+    color: #0a3b0a; /* Slightly darker shade on hover */
+    transition: color 0.3s ease; /* Smooth transition */
+}
+
+.btn-sm {
+    color: #0f4b0f !important; /* Ensure color change takes priority */ /* Optional: Make it bold for emphasis */
+}
+.custom-nav-column {
+    background-color: rgb(8, 109, 73);
+    color: white;
+}
+
+.custom-tab-content {
+    background-color: rgb(8, 109, 73);
+}
+
+.nav-pills .nav-link.active {
+    background-color: rgb(8, 109, 73);
+    color: white;
+}
+
+.nav-pills .nav-link:hover {
+    background-color: rgb(8, 109, 73);
+    color: white;
+}
+
+.nav-pills .nav-link {
+    color: black;
+}
+
+
+#v-pills-logout-tab:hover {
+    background-color: #A32424 !important;
+    color: white;
+}
+
+.table>:not(caption)>*>*{
+    background-color: #f9fbfd;
+}
+.site-column {
+    align-content: center;
+    width: 320.17px;
+    height: 40.09px;
+    overflow: hidden;            /* Hide overflow content */
+    white-space: nowrap;         /* Prevent text wrapping */
+    text-overflow: ellipsis;     /* Add ellipsis for overflowing text */
+}
+.login-column {
+    align-content: center;
+    width: 300.17px;
+    height: 40.09px;
+    overflow: hidden;            /* Hide overflow content */
+    white-space: nowrap;         /* Prevent text wrapping */
+    text-overflow: ellipsis;     /* Add ellipsis for overflowing text */
+}
+.show-column {
+    align-content: center;
+    padding-right: 20px;
+    width: 50px;
+    height: 40.09px;
+    overflow: hidden;            /* Hide overflow content */
+    white-space: nowrap;         /* Prevent text wrapping */
+    text-overflow: ellipsis;     /* Add ellipsis for overflowing text */
+}
+.password-column {
+    align-content: center;
+    width: 230.88px;
+    height: 40.09px;
+    overflow: hidden;            /* Hide overflow content */
+    white-space: nowrap;         /* Prevent text wrapping */
+    text-overflow: ellipsis;     /* Add ellipsis for overflowing text */
+}
+.upd_del-column {
+    align-content: center;
+    width: 70px;
+    height: 40.09px;
+    overflow: hidden;            /* Hide overflow content */
+    white-space: nowrap;         /* Prevent text wrapping */
+    text-overflow: ellipsis;     /* Add ellipsis for overflowing text */
+}
+.title-column {
+    align-content: center;
+    width: 270.02px;
+    height: 40.09px;
+    overflow: hidden;            /* Hide overflow content */
+    white-space: nowrap;         /* Prevent text wrapping */
+    text-overflow: ellipsis;     /* Add ellipsis for overflowing text */
+}
+/* CSS */
+.custom-container {
+    padding-left: 15px; /* Adjust as needed */
+    padding-right: 15px; /* Adjust as needed */
+    /* Add any other custom styles here */
+}
+
+/* Correctly target the dropdown toggle when the dropdown is open */
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+    background-color: rgb(8, 109, 73); /* Desired background color */
+    color: white;               /* Desired text color */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+/* Optional: Change the background color on hover when active */
+.nav-item.dropdown.show > .nav-link.dropdown-toggle:hover{
+    background-color: rgb(8, 109, 73); /* Slightly darker shade for hover effect */
+    color: white;
+}
+
+.nav-item.dropdown-item.active > .nav-link.dropdown-toggle:hover{
+    background-color: rgb(8, 109, 73); /* Slightly darker shade for hover effect */
+    color: white;
+}
+
+.dropdown-item:hover{
+    background-color: rgb(8, 109, 73); /* Slightly darker shade for hover effect */
+    color: white;
+}
+
+.btn-primary{
+    background-color: rgb(8, 109, 73);
+
+}
+.toast-header {
+    background-color: rgb(8, 109, 73); /* Darker header */
+    color: #fff; /* White text *//
+}
+
+.toast-header-error {
+    background-color: #A32424; /* Darker header */
+    color: #fff; /* White text *//
+}
+
+.col-md-4 {
+    width: 20%;
+}
+
+.fixed-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 45px;       /* Increase the width */
+    height: 45px; 
+    padding-top: 8px;
+    opacity: 60%;
+}
+
+.fixed-button-top {
+    bottom: 100px; /* Adjust position above the existing button */
+    right: 20px;
+    
+    
+}
+.btn-primary {
+    background-color: #2d53da;
+    text-decoration: none; /* Remove any underlines or default hover effects */
+}
+.btn-primary:hover {
+    background-color: rgb(6, 77, 52);
+    text-decoration: none; /* Remove any underlines or default hover effects */
+    
+}
+
+.btn:hover {
+    transition: opacity 0.7s ease;
+    opacity:100%;
+    text-decoration: none; /* Remove any underlines or default hover effects */
+}
+
+#toggleMasterPasswordVisibility{
+    float: right;
+    top:-27px;
+    margin-left: -15px;
+    right: 10px;
+    position:relative;
+}
+
+#toggleConfirmPasswordVisibility{
+    float: right;
+    top:11px;
+    margin-left: -15px;
+    right: 15px;
+    position:relative;
+}
+#toggleNewPasswordVisibility{
+    float: right;
+    top:11px;
+    margin-left: -15px;
+    right: 15px;
+    position:relative;
+}
+#toggleCurrentPasswordVisibility{
+    float: right;
+    top:11px;
+    margin-left: -15px;
+    right: 15px;
+    position:relative;
+}
+#currentMasterPassword  {
+    border-radius:7px;
+}
+#confirmMasterPassword  {
+    border-radius:7px;
+}
+#newMasterPassword  {
+    border-radius:7px;
+}

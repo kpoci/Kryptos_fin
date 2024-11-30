@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+{% block title %} Login Page {% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+    body {
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #f8f9fa;
+    }
+    .form-container {
+        display: flex;
+        flex-direction: row; /* Ensures left and right sections are side by side */
+        width: 100vw; /* Full width of the viewport */
+        height: 100vh; /* Full height of the viewport */
+        background: #ffffff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 0; /* Remove rounded corners for a full-screen effect */
+        overflow: hidden;
+    }
+    .right-section {
+        width: 50%;
+        background: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        padding-left: 300px;
+        margin-top: -100px;
+    }
+    .left-section {
+        width: 50%;
+        background: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 15%;
+        margin-top: -1.4%;
+    }
+    .right-section {
+        width: 50%;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .form-title {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    .btn2 {
+        width: 100%;
+        background-color: #086d49;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+    .btn2:hover {
+        background-color: #064c36;
+    }
+    .links {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .links a {
+        color: #086d49;
+        text-decoration: none;
+    }
+    .links a:hover {
+        text-decoration: underline;
+    }
+    .black-text {
+        color: black;
+    }
+    .theme-text {
+        color: rgb(8, 109, 73);
+    }
+    
+    .ca-features__list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Creates a 2-column layout */
+        gap: 20px; /* Adds space between grid items */
+    }
+    
+    .ca-features__item {
+        display: flex;
+        align-items: center; /* Centers content vertically */
+    }
+    
+    .ca-features--checkmark {
+        margin-right: 10px; /* Space between checkmark and text */
+    }
+    .container{
+        background: #ffffff;
+        width: 450px;
+        padding: 1.5rem;
+        margin: 50px auto;
+        border-radius: 10px;
+        height: 500px;
+        margin-top: 100px;
+        box-shadow: 0 2px 4px rgb(171 169 169 / 90%);
+        display: center;
+    }
+    .ca-features__title{
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .img-thumbnail{
+        border:none;
+    }
+    .ca-content__article--header{
+        padding-top:74px;
+        padding-bottom:25px;
+    }
+    .ca-content__article_headerfree{
+        margin-top:-7px
+    }
+</style>
+</head>
+<body>
+<!-- Navbar -->
+
+<!-- Form Container -->
+<div class="form-container">
+    <!-- Left Section -->
+    <div class="left-section">
+        <div class="ca-content">
+            <article class="ca-content__article">
+                <section>
+                    <!-- Header -->
+                    <div class="ca-content__article--header free">
+                        <h1>
+                            <span class="theme-text"><strong>Single</strong></span> 
+                            <span class="black-text"><strong>Password,</strong></span> 
+                        </h1>
+                        <h1>
+                            <div class="ca-content__article_headerfree">
+                            <span class="theme-text"><strong>Total</strong></span> 
+                            <span class="black-text"><strong>Peace of Mind.</strong></span>
+                            </div>
+                        </h1>
+                    </div>
+                    <!-- Illustration -->
+                    <div class="ca-content__article--illustration">
+                        <img src="{{ url_for('static', filename='Group 66.png') }}" class="img-thumbnail" alt="Illustration" 
+                        style="margin-left:-5px;width: 400px; height: auto; object-fit: cover;"/>
+                        
+                    </div>
+                    
+                    <div class="ca-features__title">
+                        <h3>
+                            <span class="black-text"><strong>Features</strong></span> 
+                        </h3>
+                    </div>
+                    <!-- Features Section -->
+                    <div class="ca-features-container">
+                        <div class="ca-features">
+
+                            <ul class="ca-features__list">
+                                <li class="ca-features__item">
+                                    <span class="ca-features--checkmark">✔</span>
+                                    <span class="ca-features--description">Secure password vault</span>
+                                </li>
+                                <li class="ca-features__item">
+                                    <span class="ca-features--checkmark">✔</span>
+                                    <span class="ca-features--description">Integrated encryption keys</span>
+                                </li>
+                                <li class="ca-features__item">
+                                    <span class="ca-features--checkmark">✔</span>
+                                    <span class="ca-features--description">Password Generator</span>
+                                </li>
+                                <li class="ca-features__item">
+                                    <span class="ca-features--checkmark">✔</span>
+                                    <span class="ca-features--description">Two-factor Authentication</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </article>
+        </div>
+    </div>
+
+    <!-- Right Section -->
+    <div class ="right-section">
+        <div class="container" id="signin">
+            <h1 class="form-title">Kry<span style="color: rgb(8, 109, 73);">ptos***</span></h1>
+            
+            <!-- Flash Messages Section -->
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ 'danger' if category == 'error' else category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <form method="post" action="{{ url_for('login') }}">
+                <div class="input-group">
+                    
+                    <input type="username" name="username" id="username" placeholder="Username" required>
+                    <label for="username">Username</label>
+                </div>
+                <div class="input-group">
+                    
+                    <input type="password" name="master_pass" id="master_pass" placeholder="Password" required>
+                    <label for="password">Password</label>
+                </div>
+                <p class="recover">
+                    <a href="{{ url_for('recover_password') }}">Recover Password</a>
+                </p>        
+                <input type="submit" class="btn btn2" value="Log In" name="signIn">
+            </form>
+            <div class="links">
+                <p>Don't have an account?</p>
+                <p><a class="link-opacity-50-hover link-underline-opacity-50" href="register">Register</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}

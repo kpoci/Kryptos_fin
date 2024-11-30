@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}Register Page{% endblock %}
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=True) %}
+{% if messages %}
+    {% for category, message in messages %}
+        <div class="alert alert-{{ 'danger' if category == 'error' else category }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+<div class="register-con">
+    <h1 class="form-title">Register</h1>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='register.css') }}">
+
+    <form method="post" action="">
+        <!-- Username Field -->
+        <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" name="username" id="username" placeholder="Username" required>
+            <label for="username">Username</label>
+        </div>
+
+        <!-- Email Field -->
+        <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" name="email" id="email" placeholder="Email" required>
+            <label for="email">Email</label>
+        </div>
+
+        <!-- Master Password Field -->
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" name="master_pass" id="master_pass" placeholder="Master Password" required>
+            <label for="master_pass">Master Password</label>
+        </div>
+
+        <!-- Confirm Master Password Field -->
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" name="confirm_master_pass" id="confirm_master_pass" placeholder="Confirm Master Password" required>
+            <label for="confirm_master_pass">Confirm Master Password</label>
+        </div>
+
+        <!-- Show Password Toggle and Suggest Password Button -->
+        <div class="password-tools">
+            <div class="show-password-toggle">
+                <input type="checkbox" id="show-password-toggle">
+                <label for="show-password-toggle">Show Password</label>
+            </div>
+            <button type="button" id="suggest-master-pass" class="btn-secondary">Suggest Password</button>
+        </div>
+
+        <!-- Password Strength Meter -->
+        <div class="password-strength">
+            <meter max="5" id="master-pass-strength-meter"></meter>
+            <p id="master-pass-strength-text"></p>
+            <!-- Password Requirements -->
+            <p class="password-requirements">
+                <i>Password must be at least 8 characters long and include uppercase letters, lowercase letters, numbers, and special characters. Spaces are allowed.</i>
+            </p>
+        </div>
+
+        <!-- Security Question Dropdown -->
+        <div class="input-group">
+            <i class="fas fa-question-circle"></i>
+            <select name="security_question" id="security_question" required>
+                <option value="" disabled selected>Select a Security Question</option>
+                <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                <option value="What was the name of your first pet?">What was the name of your first pet?</option>
+                <option value="What is the name of the first school you attended?">What is the name of the first school you attended?</option>
+                <option value="What is the name of the town where you were born?">What is the name of the town where you were born?</option>
+                <option value="What is the name of your favorite book or movie?">What is the name of your favorite book or movie?</option>
+                <option value="What is the first concert you attended?">What is the first concert you attended?</option>
+                <option value="What is your dream job?">What is your dream job?</option>
+                <option value="What is the name of the hospital where you were born?">What is the name of the hospital where you were born?</option>
+                <option value="What was your childhood nickname?">What was your childhood nickname?</option>
+                <option value="What was the name of your first crush?">What was the name of your first crush?</option>
+                <!-- Add more questions as needed -->
+            </select>
+        </div>
+
+        <!-- Security Answer Field -->
+        <div class="input-group">
+            <i class="fas fa-pencil-alt"></i>
+            <input type="text" name="security_answer" id="security_answer" placeholder="Your Answer" required>
+            <label for="security_answer">Security Answer</label>
+        </div>
+
+        <!-- Submit Button -->
+        <input type="submit" class="btn" value="Sign Up" name="signUp">
+
+        <!-- Go Back Button -->
+        <div class="go-back-link">
+            <p>
+                <span>Already have an account?</span>
+                <a href="{{ url_for('login') }}" class="btn-secondary">Go Back to Login</a>
+            </p>
+            
+
+        </div>
+    </form>
+</div>
+
+<!-- Include JavaScript files -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ url_for('static', filename='register.js') }}"></script>
+{% endblock %}

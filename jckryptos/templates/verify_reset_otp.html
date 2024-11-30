@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Recovery Verification</title>
+    <!-- Bootstrap 5.3.0 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-..." crossorigin="anonymous">
+
+    <!-- Font Awesome 6.5.1 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Reset some basic elements */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inria Sans', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .verification-container {
+            background-color: #fff;
+            width: 400px;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .verification-container h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .verification-container p {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .verification-container form {
+            width: 100%;
+        }
+
+        .verification-container input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border: 1px solid #ccd0d5;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .verification-container input[type="text"]:focus {
+            border-color: #1877f2;
+            box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
+        }
+
+
+        .verification-container button:hover {
+            background-color: rgb(5, 80, 73);
+        }
+
+        .verification-container .resend-link {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .verification-container {
+                width: 90%;
+                padding: 30px 20px;
+            }
+        }
+        .btn2{
+            margin-right: 10px;
+            font-size:1.1rem;
+            padding:8px 5px;
+            border-radius:10px;
+            outline:none;
+            border:none;
+            width:50%;
+            background:rgb(8, 109, 73);
+            color:white;
+            cursor:pointer;
+            transition:0.9s;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="verification-container">
+        <!-- Flash Messages Section -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flashes">
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+      
+        <h3>OTP Verification</h3>
+        <p>Please enter the 6-digit OTP code that was sent to your email address: <strong id="email" data-email="{{ email }}">{{ email }}</strong>.</p>
+
+
+        <!-- Form to submit OTP to server -->
+        <form method="post" action="{{ url_for('verify_reset_otp') }}">
+            {{ form.hidden_tag() }}
+            {{ form.otp(placeholder="Enter your OTP", maxlength="6", pattern="\\d{6}", class_="form-control") }}
+            {{ form.verify_submit(class_="btn2") }}
+        </form>
+
+        <!-- Resend OTP Functionality -->
+        <div class="resend-link">
+            <form id="resend-otp-form" action="{{ url_for('resend_reset_otp') }}" method="POST" style="display: inline;">
+                <button class="btn btn-outline-secondary align-baseline" id="resend-otp-btn">RESEND</button>
+            </form>
+            <p id="countdown" style="display: none;">Please wait <span id="timer">60</span> seconds before resending.</p>
+        </div>
+    </div>
+
+    <!-- jQuery 3.6.0 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-..." crossorigin="anonymous"></script>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- JavaScript for Resend OTP -->
+    <script>
+        document.getElementById('resend-otp-form').addEventListener('submit', function(event) {
+            var button = document.getElementById('resend-otp-btn');
+            var countdownElement = document.getElementById('countdown');
+            var timer = document.getElementById('timer');
+            var countdown = 60; // 60 seconds cooldown
+
+            // Disable the button and start countdown
+            button.disabled = true;
+            button.innerText = 'Resending...';
+            countdownElement.style.display = 'block';
+
+            var interval = setInterval(function() {
+                countdown--;
+                timer.innerText = countdown;
+                if (countdown <= 0) {
+                    clearInterval(interval);
+                    button.disabled = false;
+                    button.innerText = 'Resend OTP';
+                    countdownElement.style.display = 'none';
+                }
+            }, 1000);
+        });
+
+        function maskEmail(email) {
+            let [local, domain] = email.split('@');
+            let maskedLocal = local.length > 2 
+                ? local[0] + '*'.repeat(local.length - 2) + local.slice(-1) 
+                : local[0] + '*';
+            return `${maskedLocal}@${domain}`;
+        }
+        
+        const emailElement = document.querySelector('strong');
+        const originalEmail = emailElement.textContent.trim(); // Assuming email is inside a <strong> tag
+        emailElement.textContent = maskEmail(originalEmail);
+    </script>
+</body>
+</html>
